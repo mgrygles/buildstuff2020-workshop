@@ -19,38 +19,41 @@ It has two distinct components, originally it were three. The third was called K
 
 This workshop will **focus on Knative Serving** and will cover the following topics:
 
-1. Prerequisites (access to a Kubernetes cluster, work environment, etc.)
-1. Installing Knative
-1. Deploying an example app as Knative Service
+1. Prerequisites (access to an OpenShift cluster, work environment, etc.)
+
+1. Installing Required Operators
+
+1. Create, change and deploy a Vert.x example app as Knative service
+
+1. Create a Tekton pipeline and deploy your Vert.x app with it
+
 1. Creating a Knative Revision
+
 1. Traffic Management
+
 1. Auto-Scaling
+
 1. Debugging Tips
 
-There are two distinct workshop tracks. Your workshop instructor will tell you which one to follow.
+Click the link below to get started. Have fun! :smiley:
 
-Track 1: Kubernetes   | Track 2: Openshift
---------- | -----------
-**[Knative on IBM Cloud Kubernetes Service (IKS)](iks/1-Prereqs.md)** | **[OpenShift Serverless on Red Hat OpenShift on IBM Cloud](openshift/1-Prereqs.md)** 
+**[OpenShift Serverless on Red Hat OpenShift on IBM Cloud](openshift/1-Prereqs.md)**
 
-
-
-To complete this workshop, basic understanding of Kubernetes/OpenShift and application deployment on Kubernetes is instrumental!
+Note: To complete this workshop, basic understanding of Kubernetes/OpenShift and application deployment on Kubernetes is instrumental!
 
 ## Resources:
 
 You can find detailed information and learn more about Knative here:
 
 1. [Knative documentation](https://knative.dev/docs)
+
 2. [Red Hat Knative Tutorial](https://redhat-developer-demos.github.io/knative-tutorial/knative-tutorial/index.html)
 3. [Deploying serverless apps with Knative (IBM Cloud Documentation)](https://cloud.ibm.com/docs/containers?topic=containers-serverless-apps-knative)
 4.  A series of blogs on Knative:
-   - [Serverless and Knative – Part 1: Installing Knative on CodeReady Containers](https://haralduebele.blog/2020/06/02/serverless-and-knative-part-1-installing-knative-on-codeready-containers/)
-   - [Serverless and Knative – Part 2: Knative Serving](https://haralduebele.blog/2020/06/03/serverless-and-knative-part-2-knative-serving/)
-   - [Serverless and Knative – Part 3: Knative Eventing](https://haralduebele.blog/2020/06/10/serverless-and-knative-part-3-knative-eventing/)
-   - [Knative Example: Deploying a Microservices Application](https://haralduebele.blog/2020/07/02/knative-example-deploying-a-microservices-application/) -- The YAML files for this example are in the `code/cloud-native-starter` directory
-
-There is an [Instructor Readme](instructor.md), too.
+      - [Serverless and Knative – Part 1: Installing Knative on CodeReady Containers](https://haralduebele.blog/2020/06/02/serverless-and-knative-part-1-installing-knative-on-codeready-containers/)
+      - [Serverless and Knative – Part 2: Knative Serving](https://haralduebele.blog/2020/06/03/serverless-and-knative-part-2-knative-serving/)
+      - [Serverless and Knative – Part 3: Knative Eventing](https://haralduebele.blog/2020/06/10/serverless-and-knative-part-3-knative-eventing/)
+      - [Knative Example: Deploying a Microservices Application](https://haralduebele.blog/2020/07/02/knative-example-deploying-a-microservices-application/) -- The YAML files for this example are in the `code/cloud-native-starter` directory
 
 ## Tools:
 
