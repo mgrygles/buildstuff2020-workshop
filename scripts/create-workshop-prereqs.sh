@@ -70,6 +70,11 @@ else
 fi
 
 echo
+echo "==> Creating the OpenShift project for this workshop"
+oc new-project jfall-workshop
+echo "==> Done!"
+
+echo
 echo "==> ****************************************************"
 echo "==> "
 echo "==> Successfully installed JFall 2020 workshop pre-reqs"

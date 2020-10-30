@@ -76,5 +76,5 @@ cd knative-handson-workshop/code
 
 ---
 
-__Continue with the next part [Installing Required Operators](2-InstallKnative.md)__
+__Continue with the next part [Installing Required OpenShift Operators](2-InstallKnative.md)__
       

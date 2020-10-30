@@ -25,15 +25,15 @@ This workshop will **focus on Knative Serving** and will cover the following top
 
 1. Create, change and deploy a Vert.x example app as Knative service
 
-1. Create a Tekton pipeline and deploy your Vert.x app with it
-
 1. Creating a Knative Revision
 
 1. Traffic Management
 
 1. Auto-Scaling
 
-1. Debugging Tips
+1. Create an OpenShift pipeline and deploy your Vert.x app with it
+
+1. Debugging Tips 
 
 ---
 

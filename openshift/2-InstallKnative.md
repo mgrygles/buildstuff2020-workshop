@@ -15,7 +15,33 @@ In this section, the steps for the command line are listed.
 1. Next, run the following script:
 
    ```bash
-   $ ./scripts/create-workshop-prereqs.sh
+   $ cd ./scripts
+   $ ./create-workshop-prereqs.sh
+   ```
+   
+   the output should end with something similar to:
+
+   ```
+   {
+   "lastTransitionTime": "2020-10-30T10:57:07Z",
+   "message": "Dependency installing: Kourier",
+   "reason": "Installing",
+   "status": "False",
+   "type": "Ready"
+   }
+
+   DependenciesInstalled=True
+   DeploymentsAvailable=True
+   InstallSucceeded=True
+   Ready=True
+
+   ==> Done!
+
+   ==> ****************************************************
+   ==> 
+   ==> Successfully installed JFall 2020 workshop pre-reqs
+   ==> 
+   ==> ****************************************************
    ```
 
 This script creates a subscription to both the serverless and the pipelines operator, it creates the `knative-serving` namespace and it enables the Knative Serving API.

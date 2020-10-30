@@ -1,5 +1,4 @@
-# Deploy a Knative Service
-
+# Create, change and deploy a Vert.x example app as Knative service
 
 Knative Serving is responsible for deploying and running containers and also for networking and auto-scaling. Auto-scaling in Knative allows scale to zero and is probably the main reason why Knative is referred to as Serverless platform.
 
