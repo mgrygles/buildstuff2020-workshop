@@ -7,17 +7,6 @@ echo "==> "
 echo "==> **************************************************"
 echo
 
-# Create a new project for this workshop"
-echo "==> Create a new project for this workshop"
-oc new-project jfall-workshop
-RESPONSE=$?
-
-if [ $RESPONSE -ne 0 ]; then
-  exit 1
-else
-  echo "==> Done!"
-fi
-
 # Install the necessary pipline resources
 echo "==> Creating Pipeline Resources for Git repo and target Docker image"
 oc apply -f pipeline-resources.yaml
