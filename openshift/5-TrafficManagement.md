@@ -1,40 +1,40 @@
 # Knative Traffic Management
 
-In the last section you have replaced revision v1 of the helloworld app with revision v2.
+In the last section you have replaced revision v1 of the hellojfall app with revision v2.
 
 What if you want to do a canary release and test the new revision/version on a subset of your users?  
 
 This is something you can easily do with Istio. It requires additional VirtualService and DestinationRule definitions.
 
 Here is the Knative way, *service-v2-canary.yaml*:
-```
+```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: helloworld
+  name: hellojfall
 spec:
   template:
     metadata:
-      name: helloworld-v2
+      name: hellojfall-v2
     spec:
       containers:
-        - image: docker.io/ibmcom/kn-helloworld
+        - image: docker.io/ibmcom/kn-hellojfall
           env:
             - name: TARGET
-              value: "HelloWorld Sample v2 -- UPDATED"
+              value: "hellojfall Sample v2 -- UPDATED"
   traffic:
     - tag: v1
-      revisionName: helloworld-v1
+      revisionName: hellojfall-v1
       percent: 75
     - tag: v2
-      revisionName: helloworld-v2
+      revisionName: hellojfall-v2
       percent: 25
 ```
 Those additional 7 lines of code will create a 75% / 25% distribution between revisions -v1 / -v2.
 
 1. In the IBM Cloud Shell session deploy the change:
-   ```
-   oc apply -f service-v2-canary.yaml
+   ```bash
+   $ oc apply -f service-v2-canary.yaml
    ```
    
 1. In the OpenShift Web Console, Topology, you can see that now both revisions are activated, v1 with 75 %, v2 with 25 %.

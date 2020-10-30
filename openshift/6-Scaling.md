@@ -5,15 +5,15 @@ Scale to zero is an interesting feature but without additional tricks (like pre-
 On the other hand, if our application / microservice is hit hard with many requests, a single pod may not be sufficient to serve them and we may need to scale up. And preferably scale up and down automatically.
 
 Auto-scaling is accomplished by simply adding a few annotation statements to the Knative Service description, *service-v3-scaling.yaml*:
-```
+```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: helloworld
+  name: hellojfall
 spec:
   template:
     metadata:
-      name: helloworld-v3
+      name: hellojfall-v3
       annotations:
         # the minimum number of pods to scale down to
         autoscaling.knative.dev/minScale: "1"
@@ -23,10 +23,10 @@ spec:
         autoscaling.knative.dev/target: "1"
     spec:
       containers:
-        - image: docker.io/ibmcom/kn-helloworld
+        - image: docker.io/ibmcom/kn-hellojfall
           env:
             - name: TARGET
-              value: "HelloWorld Sample v3 -- Scaling"
+              value: "hellojfall Sample v3 -- Scaling"
 ```
 * `minScale: "1"` prevents scale to zero, there will always be at least 1 pod active.
 * `maxScale: "5"` will allow to start a maximum of 5 pods.
@@ -37,10 +37,10 @@ You can also [scale based on CPU usage or number of requests](https://cloud.ibm.
 1. Deploy as usual (`oc apply ...`) and test if it works (`curl ...`).
 
 1. Download the `hey` load generator tool into your IBM Cloud Shell session and make it executable:
-   ```
-   wget https://storage.googleapis.com/hey-release/hey_linux_amd64
-   mv hey_linux_amd64 hey
-   chmod +x hey
+   ```bash
+   $ wget https://storage.googleapis.com/hey-release/hey_linux_amd64
+   $ mv hey_linux_amd64 hey
+   $ chmod +x hey
    ```
 1. In the OpenShift Web Console, Topology view, notice that 1 pod is started. This 1 pod will not scale to zero (`minScale: "1"`).
 
@@ -48,8 +48,8 @@ You can also [scale based on CPU usage or number of requests](https://cloud.ibm.
    
 1. In the IBM Cloud Shell session generate some load on this copied URL:
    (Don't forget the './' !)
-   ```
-   ./hey -z 30s -c 50 http://helloworld-....appdomain.cloud   
+   ```bash
+   $ ./hey -z 30s -c 50 http://hellojfall-....appdomain.cloud   
    ```
 1. Switch over to OpenShift Web Console and watch the pod count go up to 5:
    ![5 pods](images/scaleto5pods.png)

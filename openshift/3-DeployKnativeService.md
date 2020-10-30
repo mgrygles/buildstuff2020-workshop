@@ -57,126 +57,126 @@ There is also a Dockerfile that can be used to build a container image. You can 
 
 If you don't like Node.js, the Hello World sample is available in other languages, too: Go, Java, PHP, Python, Ruby, etc.
 
-For this workshop we will use a Container Image on Docker Hub (docker.io) provided by IBM. They used the Helloworld Go sample to build the image.
+For this workshop we will use a Container Image on Docker Hub (docker.io) provided by IBM. They used the hellojfall Go sample to build the image.
 
 ## Deploy a Knative Service (ksvc)
 
-Throughout this workshop we will use the 'default' project (namespace) of the OpenShift cluster.
+Throughout this workshop we will use the 'jfall-workshop' project (namespace) of the OpenShift cluster.
 
 Knative deployments use YAML files just like Kubernetes but much simpler.
 
-In IBM Cloud Shell change to the knative-handson-workshop/code/deploy directory:
+In IBM Cloud Shell change to the jfall2020-workshop/code/deploy directory:
 
-```
-cd deploy
+```bash
+$ cd deploy
 ```
 
-We will deploy the first revision of the helloworld service with the file *service.yaml*:
-```
+We will deploy the first revision of the 'hellojfall' service with the file *service.yaml*:
+```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: helloworld
+  name: hellojfall
 spec:
   template:
     metadata:
-      name: helloworld-v1
+      name: hellojfall-v1
     spec:
       containers:
-        - image: docker.io/ibmcom/kn-helloworld
+        - image: docker.io/ibmcom/kn-hellojfall
           env:
             - name: TARGET
-              value: "HelloWorld Sample v1"
+              value: "hellojfall Sample v1"
 ```
  
 If you are used to Kubernetes, you have to start to pay close attention to the apiVersion to see that this is the definition of a Knative Service.
 
-The second metadata name 'helloworld-v1' is optional but highly recommended. It is used to provide predictable names for the Revisions. If you omit this second name, Knative will use default names for the Revisions (e.g. “helloworld-xhz5df”) and if you have more than one version/revision this makes it difficult to distinguish between them.
+The second metadata name 'hellojfall-v1' is optional but highly recommended. It is used to provide predictable names for the Revisions. If you omit this second name, Knative will use default names for the Revisions (e.g. “hellojfall-xhz5df”) and if you have more than one version/revision this makes it difficult to distinguish between them.
 
 The 'spec' part is 'classic' Kubernetes, it describes the location and name of the Container image and it defines the TARGET environment variable that I described in section "Sample Application".
 
 1. Deploy the service with:
 
-   ```
-   oc apply -f service.yaml
+   ```bash
+   $ oc apply -f service.yaml
    ```
    Output:
    ```
-   service.serving.knative.dev/helloworld created
+   service.serving.knative.dev/hellojfall created
    ```
 
 1. Display the status of the Knative service:
-   ```
-   kn service list
+   ```bash
+   $ kn service list
    ```
 
    Output (**Note:** Throughout the instructions the URL is always shortened to make it more readable):
    ```
    NAME         URL                                                     LATEST          AGE   CONDITIONS   READY   REASON
-   helloworld   http://helloworld-default.mycluster...appdomain.cloud   helloworld-v1   61s   3 OK / 3     True    
+   hellojfall   http://hellojfall-default.mycluster...appdomain.cloud   hellojfall-v1   61s   3 OK / 3     True    
    ```
 
-1. Copy the URL ('http://helloworld ...') and open it with `curl` or in your browser:
+1. Copy the URL ('http://hellojfall ...') and open it with `curl` or in your browser:
 
-   ```
-   curl http://helloworld-default.mycluster...appdomain.cloud
+   ```bash 
+   $ curl http://hellojfall-default.mycluster...appdomain.cloud
    ```
    Output:
    ```
-   Hello HelloWorld Sample v1!
+   Hello hellojfall Sample v1!
    ```
 
-1. Check the status of the 'helloworld' pod:
-   ```
-   oc get pod
+1. Check the status of the 'hellojfall' pod:
+   ```bash
+   $ oc get pod
    ```
    If the result is 'No resources found in default namespace.' then execute the `curl` command again or refresh the browser, the pod has then been scaled down to zero already. This happens by default after some 60 seconds.
 
    Expected output:
    ```
    NAME                                       READY   STATUS    RESTARTS   AGE
-   helloworld-v1-deployment-ff8d96cf5-72pfd   2/2     Running   0          11s
+   hellojfall-v1-deployment-ff8d96cf5-72pfd   2/2     Running   0          11s
    ```
    Notice the count for READY: 2 / 2 
    
    2 of 2 containers are started in the pod! 
    
-   Knative requires a networking layer, this could be Istio, in OpenShift Serverless this is 3Scale Kourier, which has a smaller footprint: Kourier injects an Envoy sidecar into the helloworld-v1 pod, this is the second container we are seeing in the count!
+   Knative requires a networking layer, this could be Istio, in OpenShift Serverless this is 3Scale Kourier, which has a smaller footprint: Kourier injects an Envoy sidecar into the hellojfall-v1 pod, this is the second container we are seeing in the count!
    
 1. What has been created on OpenShift?
 
    The deployment of a Knative Service with a simple YAML file creates a whole set of objects in Kubernetes. Check with:
-   ```
-   oc get all
+   ```bash
+   $ oc get all
    ```
    Output:
    ```
     NAME                                           READY   STATUS    RESTARTS   AGE
-    pod/helloworld-v1-deployment-ff8d96cf5-8f257   2/2     Running   0          32s
+    pod/hellojfall-v1-deployment-ff8d96cf5-8f257   2/2     Running   0          32s
 
     NAME                            TYPE           CLUSTER-IP       EXTERNAL-IP                      PORT(S)      AGE
-    service/helloworld              ExternalName   <none>           cluster-local....cluster.local   <none>       108m
-    service/helloworld-v1           ClusterIP      172.21.234.161   <none>                           80/TCP       108m
-    service/helloworld-v1-private   ClusterIP      172.21.220.196   <none>                           80/TCP...    108m
+    service/hellojfall              ExternalName   <none>           cluster-local....cluster.local   <none>       108m
+    service/hellojfall-v1           ClusterIP      172.21.234.161   <none>                           80/TCP       108m
+    service/hellojfall-v1-private   ClusterIP      172.21.220.196   <none>                           80/TCP...    108m
     [...]
 
     NAME                                       READY   UP-TO-DATE   AVAILABLE   AGE
-    deployment.apps/helloworld-v1-deployment   1/1     1            1           108m
+    deployment.apps/hellojfall-v1-deployment   1/1     1            1           108m
 
     NAME                                                 DESIRED   CURRENT   READY   AGE
-    replicaset.apps/helloworld-v1-deployment-ff8d96cf5   1         1         1       108m
+    replicaset.apps/hellojfall-v1-deployment-ff8d96cf5   1         1         1       108m
 
     NAME                                   URL                                                                                                                         READY   REASON
-    route.serving.knative.dev/helloworld   http://helloworld..appdomain.cloud   True    
+    route.serving.knative.dev/hellojfall   http://hellojfall..appdomain.cloud   True    
 
     NAME                                           LATESTCREATED   LATESTREADY     READY   REASON
-    configuration.serving.knative.dev/helloworld   helloworld-v1   helloworld-v1   True    
+    configuration.serving.knative.dev/hellojfall   hellojfall-v1   hellojfall-v1   True    
 
     NAME                                         CONFIG NAME   K8S SERVICE NAME   GENERATION   READY   REASON
-    revision.serving.knative.dev/helloworld-v1   helloworld    helloworld-v1      1            True    
+    revision.serving.knative.dev/hellojfall-v1   hellojfall    hellojfall-v1      1            True    
 
     NAME                                     URL                                    LATESTCREATED   LATESTREADY     READY 
-    service.serving.knative.dev/helloworld   http://helloworld....appdomain.cloud   helloworld-v1   helloworld-v1   True    
+    service.serving.knative.dev/hellojfall   http://hellojfall....appdomain.cloud   hellojfall-v1   hellojfall-v1   True    
     ```
 
     There is 1 pod, 3 services, 1 deployment, and 1 replicaset, all are Kubernetes objects. To create all this in Kubernetes itself would have taken a lot more than 14 lines of YAML code.
@@ -191,7 +191,7 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
    * A Revision (REV)
    And when you click on KSVC you even see the Route (RT)
 
-1. Click on the Route. It will display the output ("Hello HelloWorld Sample v1!")
+1. Click on the Route. It will display the output ("Hello hellojfall Sample v1!")
 
 1. Go back to the OpenShift Web Console. 
    Notice that the Revision scaled up to 1 and the 1 has a blue circle. If you wait a moment (some 60 seconds) it will scale back to 0 with an empty circle.
