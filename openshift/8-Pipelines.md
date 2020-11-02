@@ -10,7 +10,7 @@ The first two steps are put together into one Pipeline Task called `compile-and-
 
 Both tasks use so-called Pipeline Resources that serve as input and output for the task. The `compile-and-build` task needs a Git repo as input. It produces a Docker image as output. The second and final task will use this Docker image as input again. Besides these Pipeline resource both tasks use parameters as well to control how the tasks are run. 
 
-All these resources are grouped together in what is called an OpenShift pipeline. Take a look at the YAML below. This YAML describes the pipeline that is for this workshop.
+All these resources are grouped together in what is called an OpenShift pipeline. Take a look at the YAML below. 
 
 ```yaml
 apiVersion: tekton.dev/v1beta1
@@ -66,7 +66,9 @@ spec:
         name: deploy-using-kn
 ```
 
-1. Now, in the IBM Cloud Shell change to the `jfall2020-workshop/scripts` directory:
+This YAML describes the pipeline that is used in this workshop. Note how it is built up, referencing the tasks that are used, the pipelines resources, etc.
+
+1. To create this pipeline in your own environent switch tab to your IBM Cloud Shell. Then, change directory to `jfall2020-workshop/scripts`.
 
   ```bash
   $ cd ~/jfall2020-workshop/scripts
@@ -172,4 +174,6 @@ Click on one of the tasks to get to the details of the Task Run. Below the resul
 
 ![task run 1](images/task-run1.png) 
 
-As you might have noticed, by the time this screenshot was taken, the Pipeline Run successfully completed.
+As you might have noticed, by the time this screenshot was taken, the Pipeline Run successfully completed :smiley:
+
+## 
