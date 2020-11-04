@@ -202,7 +202,7 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
 
 ---
 
-__Continue with the next part [Knative Revisions](4-Revision.md)__    
+__Continue with the next part [Create an OpenShift pipeline and deploy your Vert.x app with it](8-Pipelines.md)__    
         
    
 
