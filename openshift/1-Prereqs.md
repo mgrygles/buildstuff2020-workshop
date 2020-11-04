@@ -55,7 +55,7 @@ To see details about your assigned cluster and access the OpenShift Web Console 
    
    ![cluster details](images/cluster-details.png)
 
-1. Access the OpenShift Web Console with the blue button:
+1. Access the OpenShift Web Console with the blue button. The OpenShift Web Console will open in a new tab.
    
    ![os console](images/os-console.png)
    
