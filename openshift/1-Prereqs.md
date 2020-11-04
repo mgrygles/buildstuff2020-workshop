@@ -4,7 +4,7 @@
 
 We will use pre-provisioned Red Hat OpenShift clusters on the IBM Cloud for this workshop. You need an IBM Cloud Account to assign yourself one of these clusters:
 
-1. You can register at [https://cloud.ibm.com](https://ibm.biz/BdqA52).
+1. You can register at [https://cloud.ibm.com](https://ibm.biz/Bdqkfz).
 
     We need your email address, a password, your name, and your country. 
     
@@ -62,17 +62,17 @@ To see details about your assigned cluster and access the OpenShift Web Console 
    Keep the Web Console open!
 
 
-### IBM Cloud Shell
+### The IBM Cloud Shell
 
-We will work with OpenShift in the Web Console and in the command line, using different CLIs. IBM Cloud Shell is a web based shell (terminal) that has all the required tools available. 
+We will work with OpenShift in the Web Console and in the command line, using different CLIs. The IBM Cloud Shell is a web based shell (terminal) that has all the required tools available. 
 
 1. Access IBM Cloud Shell using the icon in the title bar. Make sure you are in the IBM account (1840867 - Advowork)!:  
    
    ![cs ico](images/cloudshell-icon.png)
 
-1. It will take a moment to set up a session. Cloud Shell offers 500 MB of temporary storage, the session will close after 1 hour of inactivity, workspace data will be removed then.
+1. It will take a moment to set up a session. The Cloud Shell offers 500 MB of temporary storage and the session will close after 1 hour of inactivity. The workspace data will be removed then.
 
-1. Go back to the OpenShift Web Console and in the upper right corner open the pull down, select "Copy Login Command":
+1. Go back to the OpenShift Web Console. In the upper right corner open the pull down and select "Copy Login Command":
    
    ![copy login](images/copy-login-command.png)
 
