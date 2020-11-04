@@ -1,4 +1,4 @@
-# Quarkus
+# Create a reactive Java application using Quarkus
 This section desribes how to leverage the Quarkus framework to create and deploy a reactive Java app to OpenShift. It is heavily based on the official Quarkus [Deploying to OpenShift Guide](https://quarkus.io/guides/deploying-to-openshift).
 
 ## Generate a skeleton application
@@ -210,7 +210,7 @@ The Quarkus build that is trigger by the above command, optimizes the Java code,
 
 1. Switch tab or open the OpenShift Web Console and select Topology in the the Developer perspective
 
-![topology with quarkus](images/topology-with-quarkus.png)
+![topology with quarkus 1](images/topology-with-quarkus1.png)
 
 1. Click the Route in the openshift-quickstart service to open the application in a separate tab.
 
@@ -218,22 +218,58 @@ The Quarkus build that is trigger by the above command, optimizes the Java code,
 
 ### [Optional] Deploying the same Quarkus app as native binary
 
-One of the benefits of Quarkus is the feature to create your application as native binary. You may choose for the native image option when you:
+One of the benefits of Quarkus is the feature to create your application as native binary. This is especially beneficial if you need:
 
-* need the highest memory density requirements
-* need the highest request/s/MB for low heap size usages
-* need a start-up time as fast as possible
+* the highest memory density requirements
+* the highest request/s/MB for low heap size usages
+* fastest start-up time as possible
 
+To complete this step yourself, you would need to have either Docker or GraalVM installed and set up on your own environment -- next to Maven and Java that is. Unfortunately both Docker and GraalVM are not available on the IBM Cloud Shell, so we cannot use the shell for this step. That's why we made it optional. The workshop instructor will live demo this piece.
 
-To 
-As both Docker and GraalVM are not available in the IBM Cloud Shell, we use an OpenShift pipeline again to get our code deployed. The code repository containing the code exactly as listed above is available at: (https://github.com/eciggaar/jfall-reactive-quarkus-greeting)
+1. Before we get started with the deployment of the reactive Quarkus app, make sure you are logged on to your OpenShift cluster and that the `jfall-workshop` project is your active project.
 
+```bash
+oc project jfall-workshop
+```
 
-./mvnw clean package -Dquarkus.kubernetes.deploy=true
+In case you get the error that you're not authorized, log on to OpenShift using the Web Console and go the 'Copy Login Command' to get the token to logon to your cluster.
 
+1. The deployment of your Reactive Quarkus app as native binary is just as easy as it is to deploy the app in 'regular JVM' mode. To trigger the deployment, open a terminal and enter the following command:
 
-Now replace the application code of the GreetingResource class with the following code to mimic a Reactie Java app 
+```bash
+mvn clean package -Pnative -Dquarkus.native.container-build=true -Dquarkus.container-image.push=true -Dquarkus.container-image.name=openshift-quickstart-native
+```
 
-1. 
-`oc project
+The option `-Pnative` means we're using the native profile. The argument `-Dquarkus.native.container-build=true` tells Quarkus to build the native binary inside a container (so eliminating the need to have GraalVM installed locally). Finally, the argument  `-Dquarkus.container-image.push=true` tells Quarkus to create a container-image and push this to your image registry using the result created in the first step (the native binary in this case).
 
+1. Wait for the above process to complete. Then, check the image stream in the `jfall-workshop` project to see the new image that just has been pushed.
+
+```bash
+$ oc get is
+```
+
+In the output there should be an image with the name `openshift-quickstart-native` and tag `1.0-SNAPSHOT` that just got updated.
+
+1. Next, from this image create a new application in OpenShift. This application will be our reactive Quarkus application running as native binary.
+
+```bash
+$ oc new-app --name=openshift-quickstart-native jfall-workshop/openshift-quickstart-native:1.0-SNAPSHOT
+```
+
+1. Finally, expose a route to this application so that it is accessible by the outside world.
+
+```bash
+$ oc expose svc/openshift-quickstart-native
+```
+
+In the OpenShift Web Console, open the 'Developer -> Topology' view and check that the application shows up properly there as well. You can click the route to test that the application behaves as it should do (i.e. returning `hello` to a `/greeting` GET request and `hello {name}` to a `/greeting/{name]` GET request).
+
+![topology with quarkus 2](images/topology-with-quarkus2.png)
+
+Recall that at the beginning of this section we mentioned that using native images is really suited for scenarios where you need meet the highest memory density requirements. 
+
+1. Now in the OpenShift Web Console take a look at the pods in the 'Developer -> More -> Project Details' view.
+
+![project details](images/project-details.png)
+
+It's amazing to see that the pod hosting our native Quarkus application only consumes around 5 MB !! 
