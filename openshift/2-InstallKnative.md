@@ -9,7 +9,7 @@ In this section, the steps for the command line are listed.
 1. For this, switch tab to your IBM Cloud Shell session and go the root of the cloned git repository from the previous step.
 
    ```bash 
-   $ cd ~/jfall-workshop/scripts
+   $ cd ~/jfall2020-workshop/scripts
    ```
 
 1. Next, run the following script:
