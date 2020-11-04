@@ -9,7 +9,7 @@ items:
     - name: revision
       value: master
     - name: url
-      value: https://github.com/mgrygles/knative-handson-workshop.git
+      value: https://github.com/eciggaar/jfall2020-workshop.git
     type: git
 - apiVersion: tekton.dev/v1alpha1
   kind: PipelineResource
