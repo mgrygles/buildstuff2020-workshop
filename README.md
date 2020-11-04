@@ -1,12 +1,21 @@
-# Knative Hands-on Workshop
+# Deploying a Modern Reactive Serverless Microservice to the Cloud
+
+## Learning objectives
+
+This workshop is all about creating and deploying a reactive Java app as a Knative service on OpenShift. After this workshop you learned how to:
+
+* Create a Reactive Java application using Vert.x
+* Deploy this application as Knative service
+* How to create and use OpenShift pipelines to deploy your app
+* How to leverage Quarkus to create reactive Java applications
+
+Let's start with exploring Knative a bit more...
 
 ## Why is deploying a Knative service easier than a Kubernetess deployment? 
 
 ![Knative Logo](openshift/images/knative-logo.png)
 
 Knative is a framework running on top of Kubernetes that makes it easier to perform common tasks such as scaling up and down, routing traffic, canary deployments, etc. According to the Knative web site it is "abstracting away the complex details and enabling developers to focus on what matters. It solves the 'boring but difficult' parts of deploying and managing cloud native services so you don't have to."
-
-How is the experience of deploying an application on Kubernetes versus Knative?
 
 ## What is Knative? 
 
