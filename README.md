@@ -21,9 +21,11 @@ This workshop will **focus on Knative Serving** and will cover the following top
 
 1. Prerequisites (access to an OpenShift cluster, work environment, etc.)
 
-1. Installing Required Operators
+1. Installing the required OpenShift Operators
 
 1. Create, change and deploy a Vert.x example app as Knative service
+
+1. Create an OpenShift pipeline and deploy your Vert.x app with it
 
 1. Creating a Knative Revision
 
@@ -31,13 +33,11 @@ This workshop will **focus on Knative Serving** and will cover the following top
 
 1. Auto-Scaling
 
-1. Create an OpenShift pipeline and deploy your Vert.x app with it
+1. Create a reactive Java application using Quarkus
 
-1. Debugging Tips 
+Click the link below to get started & have fun!! Happy coding :smiley:
 
 ---
-
-Click the link below to get started. Have fun! :smiley:
 
 **[OpenShift Serverless on Red Hat OpenShift on IBM Cloud](openshift/1-Prereqs.md)**
 
@@ -49,7 +49,7 @@ To complete this workshop, basic understanding of Kubernetes/OpenShift and appli
 
 In this workshop we will be using the IBM Cloud Shell which has all required tools installed.
 
-Should you prefer to run the workshop completely off your own workstation you need the following tools (depending on the track you select):
+Should you prefer to run the workshop completely off your own workstation you need the following tools.
 
 Tool  |Source       
 ----------------|----

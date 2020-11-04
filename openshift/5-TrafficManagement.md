@@ -1,6 +1,6 @@
 # Knative Traffic Management
 
-In the last section you have replaced revision v1 of the hellojfall app with revision v2.
+In the previous section you have replaced revision v1 of the hellojfall app with revision v2.
 
 What if you want to do a canary release and test the new revision/version on a subset of your users?  
 

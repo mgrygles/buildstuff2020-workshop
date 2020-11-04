@@ -83,4 +83,4 @@ etc.
   
 ---
 
-__Continue with the last part [Knative Debugging Tips](../iks/7-Debugging.md)__
+__Continue with the last part [Create a reactive Java application using Quarkus](9-ReactiveQuarkus.md)__
