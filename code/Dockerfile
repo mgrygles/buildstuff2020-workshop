@@ -9,4 +9,4 @@ FROM fabric8/s2i-java:2.0
 
 # Copy the JAR file to the deployment directory.
 ENV JAVA_APP_DIR=/deployments
-COPY target/vertx-sept04-1.0-SNAPSHOT.jar /deployments/
+COPY target/vertx-nov05-1.0-SNAPSHOT.jar /deployments/

@@ -24,37 +24,74 @@ And Knative uses a new CLI `kn` which is already installed in IBM Cloud Shell.
 
 ## Sample application
 
-In this workshop we will use one of the [Hello World](https://knative.dev/docs/serving/samples/hello-world/) code samples from the Knative documentation site.
+In this workshop we will use a modified version of the [Hello World](https://knative.dev/docs/serving/samples/hello-world/) Java code samples from the Knative documentation site.  The sample code can be found in the following directory structure:
 
-I have taken the liberty to copy the Node.js sample code into this Github repository so that everything is in one place. 
+java2020-workshop/code/src/main/java 
 
-This is the application code:
+./ibm/sample/HelloWorld
+
+There are 2 other example Java classes which are there to serve as a comparison between using Vert.x NetSocket, versus the use of the Java NIO, to handle asynchronous processing of echoing the input from the TCP socket:
+
+./ibm/sample/VertxEcho
+./AsynchEcho
+
+As you can see, the NIO way involves a lot more code in managing the server socket channel which can also be more error prone.
+
+An additional "empty" file which contains a barebone Vert.x framework is there for you to try different things out with the Vert.x runtime:
+
+./ibm/sample/MyHelloWorld
+
+
+For your convenience, here's the code from ./ibm/sample/HelloWorld (the sample app that we will be using for the workshop for the deployment and automated Tekton build)
 
 ```
-const express = require('express');
-const app = express();
+package ibm.sample;
 
-app.get('/', (req, res) => {
-  console.log('Hello world received a request.');
+import io.reactivex.Flowable;
+import io.vertx.reactivex.core.http.HttpServer;
+import io.vertx.reactivex.core.AbstractVerticle;
+import io.vertx.reactivex.core.http.HttpServerRequest;
+import io.vertx.reactivex.core.Vertx;
 
-  const name = process.env.TARGET || 'World';
-  res.send(`Hello ${name}!`);
-});
 
-const port = process.env.PORT || 8080;
+public class HelloWorld extends AbstractVerticle {
 
-app.listen(port, () => {
-  console.log('Hello world listening on port', port);
-});
-```
+    @Override
+    public void start() {
 
-When you make a GET request to the applications root URI ('/') it will respond with 'Hello' plus the content of the environment variable 'TARGET', or with 'World' if TARGET is not set. In addition it will log each request (console.log) which we can later pick up with 'kubectl logs ...'
+            final HttpServer server = vertx.createHttpServer();
+            final Flowable<HttpServerRequest> requestFlowable = server.requestStream().toFlowable();
+
+            requestFlowable.subscribe(httpServerRequest -> {
+
+                String target = System.getenv("TARGET");
+                if (target == null) {
+                    target = "NOT SPECIFIED";
+                }
+
+                httpServerRequest.response().setChunked(true)
+                        .putHeader("content-type", "text/plain")
+                        .setStatusCode(200) // OK
+                        .end("Hello World: " + target);
+            });
+
+            server.listen(8080);
+        }
+
+        public static void main(String[] args){
+            Vertx.vertx().deployVerticle(HelloWorld.class.getName());
+        }
+}
+
+...
+
+When you make a GET request to the applications root URI ('/') it will respond with 'Hello World' plus the content of the environment variable 'TARGET', or with 'World' if TARGET is not set. In addition it will log each request (console.log) which we can later pick up with 'kubectl logs ...'
 
 This allows to simply create new versions for deployments = Knative Revisions by just changing the content of TARGET. Not very sophisticated but sufficient to show the principles of Knative.
 
 There is also a Dockerfile that can be used to build a container image. You can use it to create your own version and store it in your own Container Image Repository or build it on OpenShift directly using a binary build or S2I.
 
-If you don't like Node.js, the Hello World sample is available in other languages, too: Go, Java, PHP, Python, Ruby, etc.
+If you don't like Java, the Hello World sample is available in other languages, too: Go, Java, PHP, Python, Ruby, etc.
 
 For this workshop we will use a Container Image on Docker Hub (docker.io) provided by IBM. They used the hellojfall Go sample to build the image.
 

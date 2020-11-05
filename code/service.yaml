@@ -7,7 +7,7 @@ spec:
   template:
     spec:
        containers:
-         - image: docker.io/mgrygles/sf-sept2020
+         - image: docker.io/mgrygles/jfall2020
              -name: TARGET
-              value: "Eclipse Vert.x helloworld San Francisco"
+              value: "Eclipse Vert.x helloworld JFall2020 Friends"
 
