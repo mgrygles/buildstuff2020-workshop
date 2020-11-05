@@ -53,7 +53,8 @@ spec:
             - create
             - knative-jfall-service
             - --image=$(resources.inputs.input-image.url)
-            - --env=TARGET=Hello JFall 2020
+            - --revision-name=knative-jfall-service-v1
+            - --env=TARGET=Hello JFall 2020 v1
             - --force
       resources:
         inputs:
