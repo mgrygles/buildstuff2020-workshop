@@ -212,13 +212,19 @@ env=TARGET
 Type `n` once to go the next search result. You should now be at the following line:
 
 ```
-      - --env=TARGET=Hello JFall 2020
+      - --env=TARGET=Hello JFall 2020 v1
 ```
 
 1. Next, type `<SHIFT> + a` (so captical A). You should now be in editing mode and at the end of the line. Make a change to the value of `TARGET`, e.g.
 
 ```
-      - --env=TARGET=Hello JFall 2020 UPDATE!!!
+      - --env=TARGET=Hello JFall 2020 v2 UPDATE!!!
+```
+
+1. A couple of lines above change the `revision-name` to:
+
+```
+      - --revision-name=knative-jfall-service-v2
 ```
 
 1. Finally, save your changes by pressing `<Esc>`, followed by type `:wq`. You should see the following output:
@@ -250,7 +256,7 @@ Age:        25m
 URL:        http://knative-jfall-service-jfall-workshop.osjfall-001-0e3e0ef4c9c6d831e8aa6fe01f33bfc4-0000.eu-de.containers.appdomain.cloud
 
 Revisions:  
-  100%  @latest (knative-jfall-service-lwjmq-1) [2] (49s)
+  100%  @latest (knative-jfall-service-v2) [2] (49s)
         Image:  image-registry.openshift-image-registry.svc:5000/jfall-workshop/jfall-image:latest (pinned to a07469)
 
 Conditions:  
@@ -259,16 +265,16 @@ Conditions:
   ++ ConfigurationsReady    43s 
   ++ RoutesReady            42s 
 ```
-Note that the `[2]` indicates that we currently have two revisions and in this case 100% load on the `knative-jfall-service-lwjmq-1` revision.
+Note that the `[2]` indicates that we currently have two revisions and in this case 100% load on the `knative-jfall-service-v2` revision.
 
 1. Back in the OpenShift Web Console, Topology view:
 
    ![rev2](images/rev2.png)
 
-   It hasn't changed a lot, but notice the two revisions in the 'Resources' where revision `*-lwjmq-1` has 100%. Its the same 100% we could see in the previous step using the Knative CLI.
+   It hasn't changed a lot, but notice the two revisions in the 'Resources' where revision `knative-jfall-service-v2` has 100%. Its the same 100% we could see in the previous step using the Knative CLI.
 
-1. Click on the Route, this will display the output of the latest revision ("Hello hellojfall Sample v2 -- UPDATED!")
-  Back in the Web Console, a pod will be started for Revision `*-lwjmq-1`. It will scale to zero after a moment. 
+1. Click on the Route, this will display the output of the latest revision ("Hello: Hello JFall 2020 v2 UPDATE!!!")
+  Back in the Web Console, a pod will be started for Revision `knative-jfall-service-v2`. It will scale to zero after a moment. 
 
 ---
 
