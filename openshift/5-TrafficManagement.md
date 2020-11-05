@@ -34,17 +34,17 @@ Type `n` once to go the next search result. You should now be at the following l
       - --env=TARGET=Hello JFall 2020 v2 UPDATE!!!
       - --tag=knative-jfall-service-v1=v1
       - --tag=knative-jfall-service-v2=v2
-      - --traffic=v1=50
-      - --traffic=v2=50
+      - --traffic=v1=75
+      - --traffic=v2=25
 ```
 
-so that the `ARGS` paramter Knative client invocation looks like:
+Furthermore, change `create` into `update` and remove the `--force` flag, so that the `ARGS` paramter Knative client invocation looks like:
 
 ```
         - name: ARGS
           value:
             - service
-            - create
+            - update
             - knative-jfall-service
             - --image=$(resources.inputs.input-image.url)
             - --revision-name=knative-jfall-service-v2
@@ -53,7 +53,6 @@ so that the `ARGS` paramter Knative client invocation looks like:
             - --tag=knative-jfall-service-v2=v2
             - --traffic=v1=75
             - --traffic=v2=25
-            - --force
 ```
 
 Those additional 4 lines of code -- with the `tag` and `traffic` entries -- will create a 75% / 25% distribution between revisions `-v1` and `-v2`.

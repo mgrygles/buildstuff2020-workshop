@@ -240,7 +240,8 @@ pipeline.tekton.dev/jfall-pipeline edited
 $ tkn pipeline start jfall-pipeline
 ```
 
-Accept the defaults again and check the logs or monitor the deployment via the Web Console. Wait for it to successfully complete.
+Accept the defaults again and check the logs or monitor the deployment via the Web Console. 
+Wait for it to successfully complete.
 
 1. Next, check the Knative service by typing:
 
