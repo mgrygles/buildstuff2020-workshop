@@ -28,6 +28,10 @@ spec:
           env:
             - name: TARGET
               value: "Hello JFall 2020 v3 -- Scaling"
+  traffic:
+    - tag: v3
+      revisionName: knative-jfall-service-v3
+      percent: 100              
 ```
 
 * `minScale: "1"` prevents scale to zero, there will always be at least 1 pod active.
