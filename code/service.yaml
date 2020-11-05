@@ -10,6 +10,7 @@ spec:
     spec:
        containers:
          - image: docker.io/mgrygles/jfall2020
-             -name: TARGET
-              value: "Eclipse Vert.x helloworld JFall2020 Friends"
+           env:
+             - name: TARGET
+               value: "Eclipse Vert.x helloworld JFall2020 Friends"
 
