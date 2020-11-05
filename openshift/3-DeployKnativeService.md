@@ -93,7 +93,7 @@ There is also a Dockerfile that can be used to build a container image. You can 
 
 If you don't like Java, the Hello World sample is available in other languages, too: Go, Java, PHP, Python, Ruby, etc.
 
-For this workshop we will use a Container Image on Docker Hub (docker.io) provided by IBM. They used the hellojfall Go sample to build the image.
+For this workshop we will use a Container Image on Docker Hub (docker.io) provided by IBM. They used the helloworld-vertx Go sample to build the image.
 
 ## Deploy a Knative Service (ksvc)
 
@@ -107,7 +107,7 @@ In IBM Cloud Shell change to the jfall2020-workshop/code/deploy directory:
 $ cd deploy
 ```
 
-We will deploy the first revision of the 'hellojfall' service with the file *service.yaml*:
+We will deploy the first revision of the 'helloworld-vertx' service with the file *service.yaml*:
 ```yaml
 apiVersion: serving.knative.dev/v1
 kind: Service
@@ -128,7 +128,7 @@ spec:
  
 If you are used to Kubernetes, you have to start to pay close attention to the apiVersion to see that this is the definition of a Knative Service.
 
-The second metadata name 'hellojfall-v1' is optional but highly recommended. It is used to provide predictable names for the Revisions. If you omit this second name, Knative will use default names for the Revisions (e.g. “hellojfall-xhz5df”) and if you have more than one version/revision this makes it difficult to distinguish between them.
+The second metadata name 'helloworld-vertx-v1' is optional but highly recommended. It is used to provide predictable names for the Revisions. If you omit this second name, Knative will use default names for the Revisions (e.g. “helloworld-vertx-xhz5df”) and if you have more than one version/revision this makes it difficult to distinguish between them.
 
 The 'spec' part is 'classic' Kubernetes, it describes the location and name of the Container image and it defines the TARGET environment variable that I described in section "Sample Application".
 
@@ -139,7 +139,7 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
    ```
    Output:
    ```
-   service.serving.knative.dev/hellojfall created
+   service.serving.knative.dev/helloworld-vertx created
    ```
 
 1. Display the status of the Knative service:
@@ -150,20 +150,20 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
    Output (**Note:** Throughout the instructions the URL is always shortened to make it more readable):
    ```
    NAME         URL                                                     LATEST          AGE   CONDITIONS   READY   REASON
-   hellojfall   http://hellojfall-default.mycluster...appdomain.cloud   hellojfall-v1   61s   3 OK / 3     True    
+   helloworld-vertx   http://helloworld-vertx-default.mycluster...appdomain.cloud   helloworld-vertx-v1   61s   3 OK / 3     True    
    ```
 
-1. Copy the URL ('http://hellojfall ...') and open it with `curl` or in your browser:
+1. Copy the URL ('http://helloworld-vertx ...') and open it with `curl` or in your browser:
 
    ```bash 
-   $ curl http://hellojfall-default.mycluster...appdomain.cloud
+   $ curl http://helloworld-vertx-default.mycluster...appdomain.cloud
    ```
    Output:
    ```
-   Hello hellojfall Sample v1!
+   Eclipse Vert.x helloworld JFall2020 Friends
    ```
 
-1. Check the status of the 'hellojfall' pod:
+1. Check the status of the 'helloworld-vertx' pod:
    ```bash
    $ oc get pod
    ```
@@ -172,13 +172,13 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
    Expected output:
    ```
    NAME                                       READY   STATUS    RESTARTS   AGE
-   hellojfall-v1-deployment-ff8d96cf5-72pfd   2/2     Running   0          11s
+   helloworld-vertx-v1-deployment-ff8d96cf5-72pfd   2/2     Running   0          11s
    ```
    Notice the count for READY: 2 / 2 
    
    2 of 2 containers are started in the pod! 
    
-   Knative requires a networking layer, this could be Istio, in OpenShift Serverless this is 3Scale Kourier, which has a smaller footprint: Kourier injects an Envoy sidecar into the hellojfall-v1 pod, this is the second container we are seeing in the count!
+   Knative requires a networking layer, this could be Istio, in OpenShift Serverless this is 3Scale Kourier, which has a smaller footprint: Kourier injects an Envoy sidecar into the helloworld-vertx-v1 pod, this is the second container we are seeing in the count!
    
 1. What has been created on OpenShift?
 
@@ -189,31 +189,31 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
    Output:
    ```
     NAME                                           READY   STATUS    RESTARTS   AGE
-    pod/hellojfall-v1-deployment-ff8d96cf5-8f257   2/2     Running   0          32s
+    pod/helloworld-vertx-v1-deployment-ff8d96cf5-8f257   2/2     Running   0          32s
 
     NAME                            TYPE           CLUSTER-IP       EXTERNAL-IP                      PORT(S)      AGE
-    service/hellojfall              ExternalName   <none>           cluster-local....cluster.local   <none>       108m
-    service/hellojfall-v1           ClusterIP      172.21.234.161   <none>                           80/TCP       108m
-    service/hellojfall-v1-private   ClusterIP      172.21.220.196   <none>                           80/TCP...    108m
+    service/helloworld-vertx              ExternalName   <none>           cluster-local....cluster.local   <none>       108m
+    service/helloworld-vertx-v1           ClusterIP      172.21.234.161   <none>                           80/TCP       108m
+    service/helloworld-vertx-v1-private   ClusterIP      172.21.220.196   <none>                           80/TCP...    108m
     [...]
 
     NAME                                       READY   UP-TO-DATE   AVAILABLE   AGE
-    deployment.apps/hellojfall-v1-deployment   1/1     1            1           108m
+    deployment.apps/helloworld-vertx-v1-deployment   1/1     1            1           108m
 
     NAME                                                 DESIRED   CURRENT   READY   AGE
-    replicaset.apps/hellojfall-v1-deployment-ff8d96cf5   1         1         1       108m
+    replicaset.apps/helloworld-vertx-v1-deployment-ff8d96cf5   1         1         1       108m
 
     NAME                                   URL                                                                                                                         READY   REASON
-    route.serving.knative.dev/hellojfall   http://hellojfall..appdomain.cloud   True    
+    route.serving.knative.dev/helloworld-vertx   http://helloworld-vertx..appdomain.cloud   True    
 
     NAME                                           LATESTCREATED   LATESTREADY     READY   REASON
-    configuration.serving.knative.dev/hellojfall   hellojfall-v1   hellojfall-v1   True    
+    configuration.serving.knative.dev/helloworld-vertx   helloworld-vertx-v1   helloworld-vertx-v1   True    
 
     NAME                                         CONFIG NAME   K8S SERVICE NAME   GENERATION   READY   REASON
-    revision.serving.knative.dev/hellojfall-v1   hellojfall    hellojfall-v1      1            True    
+    revision.serving.knative.dev/helloworld-vertx-v1   helloworld-vertx    helloworld-vertx-v1      1            True    
 
     NAME                                     URL                                    LATESTCREATED   LATESTREADY     READY 
-    service.serving.knative.dev/hellojfall   http://hellojfall....appdomain.cloud   hellojfall-v1   hellojfall-v1   True    
+    service.serving.knative.dev/helloworld-vertx   http://helloworld-vertx....appdomain.cloud   helloworld-vertx-v1   helloworld-vertx-v1   True    
     ```
 
     There is 1 pod, 3 services, 1 deployment, and 1 replicaset, all are Kubernetes objects. To create all this in Kubernetes itself would have taken a lot more than 14 lines of YAML code.
@@ -228,7 +228,7 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
    * A Revision (REV)
    And when you click on KSVC you even see the Route (RT)
 
-1. Click on the Route. It will display the output ("Hello hellojfall Sample v1!")
+1. Click on the Route. It will display the output ("Hello helloworld-vertx Sample v1!")
 
 1. Go back to the OpenShift Web Console. 
    Notice that the Revision scaled up to 1 and the 1 has a blue circle. If you wait a moment (some 60 seconds) it will scale back to 0 with an empty circle.
