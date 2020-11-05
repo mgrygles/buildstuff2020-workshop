@@ -2,9 +2,11 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: helloworld-vertx
-  namespace: default
+  namespace: jfall-workshop
 spec:
   template:
+    metadata:
+      name: helloworld-vertx-v1
     spec:
        containers:
          - image: docker.io/mgrygles/jfall2020

@@ -112,17 +112,18 @@ We will deploy the first revision of the 'hellojfall' service with the file *ser
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: hellojfall
+  name: helloworld-vertx
+  namespace: jfall-workshop
 spec:
   template:
     metadata:
-      name: hellojfall-v1
+      name: helloworld-vertx-v1
     spec:
-      containers:
-        - image: docker.io/ibmcom/kn-hellojfall
-          env:
-            - name: TARGET
-              value: "hellojfall Sample v1"
+       containers:
+         - image: docker.io/mgrygles/jfall2020
+             -name: TARGET
+              value: "Eclipse Vert.x helloworld JFall2020 Friends"
+
 ```
  
 If you are used to Kubernetes, you have to start to pay close attention to the apiVersion to see that this is the definition of a Knative Service.
