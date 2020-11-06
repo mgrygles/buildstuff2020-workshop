@@ -67,7 +67,7 @@ spec:
 
 This YAML describes the pipeline that is used in this workshop. Note how it is built up, referencing the tasks that are used, the pipelines resources, etc.
 
-*  To create this pipeline in your own environent, switch tab to your IBM Cloud Shell. Then, change directory to `jfall2020-workshop/scripts`.
+1. To create this pipeline in your own environent, switch tab to your IBM Cloud Shell. Then, change directory to `jfall2020-workshop/scripts`.
 
     ```bash
     $ cd ~/jfall2020-workshop/scripts
@@ -77,13 +77,14 @@ This YAML describes the pipeline that is used in this workshop. Note how it is b
     ```bash
     $ oc project jfall-workshop
     ```
+    
     and run the following script:
 
     ```bash
     $ ./create-pipeline.sh
     ```
 
-This script creates the pipeline resources, tasks and the pipeline itself -- all in the `jfall-workshop` project. The output should be similar to:
+  This script creates the pipeline resources, tasks and the pipeline itself -- all in the `jfall-workshop` project. The output should be similar to:
 
 ```
 ==> **************************************************
@@ -112,13 +113,14 @@ pipeline.tekton.dev/jfall-pipeline created
 ==> 
 ==> ****************************************************
 ```
+
 To verify that everything is in place, check the Pipelines section in the OpenShift Web Console. It should list the Jfall pipeline, resources and  tasks created by the script.
 
 ![pipelines](images/pipelines.png) 
 
-You can also check the presence of the resources using the command line. 
+You can also check the presence of the resources using the command line. For this,
 
-* For this, in your IBM Cloud shell use the Tekton CLI to get a list of your pipelines resources:
+2. In your IBM Cloud shell use the Tekton CLI to get a list of your pipelines resources:
   
     ```bash
     $ tkn resource list
@@ -128,7 +130,7 @@ You can also check the presence of the resources using the command line.
     ```bash
     $ tkn task list
     ```
-    and finally, for the pipeline itself execute the following command:
+    and finally, for the pipeline itself, execute the following command:
     
     ```bash
     $ tkn pipeline list
@@ -138,7 +140,7 @@ You can also check the presence of the resources using the command line.
 
 Having successfully created all pipeline resources, we can now run the pipeline. 
 
-* For this, enter:
+1. For this, enter:
 
     ```bash
     $ tkn pipeline start jfall-pipeline
@@ -156,37 +158,37 @@ Having successfully created all pipeline resources, we can now run the pipeline.
     tkn pipelinerun logs jfall-pipeline-run-xs8fd -f -n jfall-workshop
     ```
 
-* As mentioned by the output, you can monitor the progress of the pipeline run as follows:
+1. As mentioned by the output, you can monitor the progress of the pipeline run as follows:
 
     ```bash
     $ tkn pipelinerun logs jfall-pipeline-run-xs8fd -f -n jfall-workshop
     ```
 
-  Note that your pipeline run name is different from the one shown above. Also, it may take a little bit before logs are being shown here...
+    Note that your pipeline run name is different from the one shown above. Also, it may take a little bit before logs are being shown here...
 
-You can also monitor the progress of your deployment using the OpenShift Web Console. 
+    You can also monitor the progress of your deployment using the OpenShift Web Console. 
 
-* For this, open the Web Console. In the Pipelines -> Pipeline Runs section you find your running pipeline. Typically, you would see something like:
+1. For this, open the Web Console. In the Pipelines -> Pipeline Runs section you find your running pipeline. Typically, you would see something like:
 
-  ![pipeline run 1](images/pipeline-run1.png) 
+    ![pipeline run 1](images/pipeline-run1.png) 
 
-  Click on one of the tasks to get to the details of the Task Run. Below the result is shown when clicking the `compile-and-build` task.
+    Click on one of the tasks to get to the details of the Task Run. Below the result is shown when clicking the `compile-and-build` task.
 
-  ![task run 1](images/task-run1.png) 
+    ![task run 1](images/task-run1.png) 
 
-  As you might have noticed, by the time this screenshot was taken, the Pipeline Run successfully completed. 
+    As you might have noticed, by the time this screenshot was taken, the Pipeline Run successfully completed. 
 
 ## So what got deployed? :smiley:
 
-At this point we deployed our Vert.x java application to Openshift using a pipeline. Let's have a look at the application. 
+At this point we deployed our Vert.x java application to Openshift using a pipeline. Let's have a look at the application. For this,
 
-* For this, switch tab to the OpenShift Web Console, open the 'Developer' view and select 'Topology'. Make sure the 'jfall-workshop' project is selected.
+1. Switch tab to the OpenShift Web Console, open the 'Developer' view and select 'Topology'. Make sure the 'jfall-workshop' project is selected.
 
-  ![vertx knative service](images/vertx-kn-service.png) 
+    ![vertx knative service](images/vertx-kn-service.png) 
 
-  Now click the KSVC tag to view the details (pods, revisions, routes, etc.) of the Knative service. Click the route to open the application. The result should be similar to 
+    Now click the KSVC tag to view the details (pods, revisions, routes, etc.) of the Knative service. Click the route to open the application. The result should be similar to 
 
-  ![vertx app](images/vertx-app.png) 
+    ![vertx app](images/vertx-app.png) 
 
 ### Knative Revisions
 
@@ -194,90 +196,90 @@ A Knative Revision is a specific version of a code deployment.
 
 If you deploy a new version of an app in Kubernetes, you typically change the deployment.yaml file and apply the changed version using `kubectl`. Kubernetes will then perform a rolling update from the old to the new version.
 
-Let's do a new deployment of our hello world Vert.x app. Just to make life easy, we only gonna change the value of the `TARGET` environment variable that is used as parameter in the `deploy-using-kn` task. 
+Let's do a new deployment of our hello world Vert.x app. Just to make life easy, we only gonna change the value of the `TARGET` environment variable that is used as parameter in the `deploy-using-kn` task. For this,
 
-* For this, switch tab to the IBM Cloud Shell. Make sure `jfall-workshop` is your current project. Then edit the pipeline by running:
+1. Switch tab to the IBM Cloud Shell. Make sure `jfall-workshop` is your current project. Then edit the pipeline by running:
 
-  ```bash
-  $ oc edit pipeline jfall-pipeline
-  ```
+    ```bash
+    $ oc edit pipeline jfall-pipeline
+    ```
 
-  The pipeline opens in editing mode with vi as editor. 
+    The pipeline opens in editing mode with vi as editor. 
 
-* Now, search for the string `env=TARGET` by typing `/` followed by:
+1. Now, search for the string `env=TARGET` by typing `/` followed by:
 
-  ```
-  env=TARGET
-  ```
+    ```
+    env=TARGET
+    ```
 
-  Type `n` once to go the next search result. You should now be at the following line:
+    Type `n` once to go the next search result. You should now be at the following line:
 
-  ```
-  - --env=TARGET=Hello JFall 2020 v1
-  ```
+    ```
+    - --env=TARGET=Hello JFall 2020 v1
+    ```
 
-* Next, type `<SHIFT> + a` (so captical A). You should now be in editing mode and at the end of the line. Make a change to the value of `TARGET`, e.g.
+1. Next, type `<SHIFT> + a` (so captical A). You should now be in editing mode and at the end of the line. Make a change to the value of `TARGET`, e.g.
 
-  ```
-  - --env=TARGET=Hello JFall 2020 v2 UPDATE!!!
-  ```
+    ```
+    - --env=TARGET=Hello JFall 2020 v2 UPDATE!!!
+    ```
 
-* A couple of lines above change the `revision-name` to:
+1. A couple of lines above change the `revision-name` to:
 
-  ```
-  - --revision-name=knative-jfall-service-v2
-  ```
+    ```
+    - --revision-name=knative-jfall-service-v2
+    ```
 
-* Finally, save your changes by pressing `<Esc>`, followed by type `:wq`. You should see the following output:
+1. Finally, save your changes by pressing `<Esc>`, followed by type `:wq`. You should see the following output:
 
-  ```
-  pipeline.tekton.dev/jfall-pipeline edited
-  ```
+    ```
+    pipeline.tekton.dev/jfall-pipeline edited
+    ```
 
-* Use the Tekton CLI to run the pipeline again:
+1. Use the Tekton CLI to run the pipeline again:
 
-  ```bash
-  $ tkn pipeline start jfall-pipeline
-  ```
+    ```bash
+    $ tkn pipeline start jfall-pipeline
+    ```
 
-  Accept the defaults again and check the logs or monitor the deployment via the Web Console. Wait for it to successfully complete.
+    Accept the defaults again and check the logs or monitor the deployment via the Web Console. Wait for it to successfully complete.
 
-* Next, check the Knative service by typing:
+1. Next, check the Knative service by typing:
 
-  ```bash
-  $ kn service describe knative-jfall-service
-  ```
+    ```bash
+    $ kn service describe knative-jfall-service
+    ```
 
-  the output should be similar to:
+    the output should be similar to:
 
-  ```
-  Name:       knative-jfall-service
-  Namespace:  jfall-workshop
-  Age:        25m
-  URL:        http://knative-jfall-service-jfall-workshop.osjfall-001-0e3e0ef4c9c6d831e8aa6fe01f33bfc4-0000.eu-de.containers.appdomain.cloud
+    ```
+    Name:       knative-jfall-service
+    Namespace:  jfall-workshop
+    Age:        25m
+    URL:        http://knative-jfall-service-jfall-workshop.osjfall-001-0e3e0ef4c9c6d831e8aa6fe01f33bfc4-0000.eu-de.containers.appdomain.cloud
 
-  Revisions:  
-    100%  @latest (knative-jfall-service-v2) [2] (49s)
-          Image:  image-registry.openshift-image-registry.svc:5000/jfall-workshop/jfall-image:latest (pinned to a07469)
+    Revisions:  
+      100%  @latest (knative-jfall-service-v2) [2] (49s)
+            Image:  image-registry.openshift-image-registry.svc:5000/jfall-workshop/jfall-image:latest (pinned to a07469)
 
-  Conditions:  
-    OK TYPE                   AGE REASON
-    ++ Ready                  42s 
-    ++ ConfigurationsReady    43s 
-    ++ RoutesReady            42s 
-  ```
+    Conditions:  
+      OK TYPE                   AGE REASON
+      ++ Ready                  42s 
+      ++ ConfigurationsReady    43s 
+      ++ RoutesReady            42s 
+    ```
 
-  Note that the `[2]` indicates that we currently have two revisions and in this case 100% load on the `knative-jfall-service-v2` revision.
+    Note that the `[2]` indicates that we currently have two revisions and in this case 100% load on the `knative-jfall-service-v2` revision.
 
-* Back in the OpenShift Web Console, Topology view:
+1. Back in the OpenShift Web Console, Topology view:
 
-   ![rev2](images/rev2.png)
+    ![rev2](images/rev2.png)
 
-   It hasn't changed a lot, but notice the two revisions in the 'Resources' where revision `knative-jfall-service-v2` has 100%. Its the same 100% we could see in the previous step using the Knative CLI.
+    It hasn't changed a lot, but notice the two revisions in the 'Resources' where revision `knative-jfall-service-v2` has 100%. Its the same 100% we could see in the previous step using the Knative CLI.
 
-* Click on the Route, this will display the output of the latest revision ("Hello: Hello JFall 2020 v2 UPDATE!!!")
+1. Click on the Route, this will display the output of the latest revision ("Hello: Hello JFall 2020 v2 UPDATE!!!")
 
-  Back in the Web Console, a pod will be started for Revision `knative-jfall-service-v2`. It will scale to zero after a moment. 
+    Back in the Web Console, a pod will be started for Revision `knative-jfall-service-v2`. It will scale to zero after a moment. 
 
 ---
 
