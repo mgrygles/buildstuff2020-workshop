@@ -4,6 +4,7 @@ items:
   kind: PipelineResource
   metadata:
     name: git-repo
+    namespace: jfall-workshop
   spec:
     params:
     - name: revision
@@ -15,6 +16,7 @@ items:
   kind: PipelineResource
   metadata:
     name: image-source
+    namespace: jfall-workshop
   spec:
     params:
     - name: url
