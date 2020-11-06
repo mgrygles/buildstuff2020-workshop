@@ -7,6 +7,11 @@ echo "==> "
 echo "==> **************************************************"
 echo
 
+# Make sure the proper namespace is used
+echo "==> Switching to project for this workshop"
+oc project jfall-workshop
+echo "==> Done!"
+
 # Install the necessary pipline resources
 echo "==> Creating Pipeline Resources for Git repo and target Docker image"
 oc apply -f pipeline-resources.yaml
