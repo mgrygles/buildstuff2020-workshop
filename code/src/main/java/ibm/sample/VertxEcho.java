@@ -38,4 +38,6 @@ public class VertxEcho {
     private static String howMany() {
         return "We now have " + numberOfConnections + " connections";
     }
+    
 }
+
