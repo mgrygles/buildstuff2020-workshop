@@ -26,7 +26,7 @@ And Knative uses a new CLI `kn` which is already installed in IBM Cloud Shell.
 
 In this workshop we will use a modified version of the [Hello World](https://knative.dev/docs/serving/samples/hello-world/) Java code samples from the Knative documentation site.  The sample code can be found in the following directory structure:
 
-java2020-workshop/code/src/main/java 
+BuildStuff2020-workshop/code/src/main/java 
 
 ./ibm/sample/HelloWorld
 
@@ -97,11 +97,11 @@ For this workshop we will use a Container Image on Docker Hub (docker.io) provid
 
 ## Deploy a Knative Service (ksvc)
 
-Throughout this workshop we will use the 'jfall-workshop' project (namespace) of the OpenShift cluster.
+Throughout this workshop we will use the 'buildstuff2020-workshop' project (namespace) of the OpenShift cluster.
 
 Knative deployments use YAML files just like Kubernetes but much simpler.
 
-In IBM Cloud Shell change to the jfall2020-workshop/code/deploy directory:
+In IBM Cloud Shell change to the buildstuff2020-workshop/code/deploy directory:
 
 ```bash
 $ cd deploy
@@ -113,16 +113,16 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: helloworld-vertx
-  namespace: jfall-workshop
+  namespace: buildstuff-workshop
 spec:
   template:
     metadata:
       name: helloworld-vertx-v1
     spec:
        containers:
-         - image: docker.io/mgrygles/jfall2020
+         - image: docker.io/mgrygles/buildstuff2020
              -name: TARGET
-              value: "Eclipse Vert.x helloworld JFall2020 Friends"
+              value: "Eclipse Vert.x helloworld BuildStuff2020 Friends"
 
 ```
  
@@ -160,7 +160,7 @@ The 'spec' part is 'classic' Kubernetes, it describes the location and name of t
    ```
    Output:
    ```
-   Eclipse Vert.x helloworld JFall2020 Friends
+   Eclipse Vert.x helloworld BuildStuff2020 Friends
    ```
 
 1. Check the status of the 'helloworld-vertx' pod:
