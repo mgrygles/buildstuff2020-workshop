@@ -4,7 +4,7 @@
 
 We will use pre-provisioned Red Hat OpenShift clusters on the IBM Cloud for this workshop. You need an IBM Cloud Account to assign yourself one of these clusters:
 
-1. You can register at [https://cloud.ibm.com](https://ibm.biz/Bdqkfz).
+1. You can register at [https://cloud.ibm.com](https://ibm.biz/BdqUcb).
 
     We need your email address, a password, your name, and your country. 
     
@@ -22,7 +22,7 @@ In this step you will assign yourself a pre-provisioned cluster.
 
    Sign up for the Free Openshift Lab cluster here: 
    
-   URL: **https://osjfall.mybluemix.net/**  
+   URL: **https://osbstuff.mybluemix.net/**  
    **key: oslab**
 
    ![granttool1](images/granttool1.png)
@@ -98,8 +98,8 @@ We will work with OpenShift in the Web Console and in the command line, using di
 In your Cloud Shell enter the following command to download the code from Github:
 
 ```bash
-$ git clone https://github.com/eciggaar/jfall2020-workshop
-$ cd jfall2020-workshop
+$ git clone https://github.com/mgrygles/buildstuff2020-workshop
+$ cd buildstuff2020-workshop
 ```
 
 ---
