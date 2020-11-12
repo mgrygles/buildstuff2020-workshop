@@ -1,7 +1,10 @@
-# Installing Required OpenShift Operators 
+# Installing Required OpenShift Operator for the hands-on lab
 
-Two operators need to be installed to successfully complete this workshop, the OpenShift Serverless Operator and the OpenShift Pipelines operator. This can be done via the UI or via the command line. 
+One operator needs to be installed to successfully complete this workshop, the OpenShift Serverless Operator. This can be done via the UI, or if you will be using the provided shell script via the command line, it will take care of installing both the Serverless and the Pipeline Operators.
 
+# OPTIONAL: Installing Openshift Operator for the take-home lab
+
+If you plan to continue working on the optional take-home portion of the lab, but have not installed the OpenShift Pipeline Operator, you can do so using the UI, unless you have run the provided the shell script which would take care of installing both the Serverless and the Pipline Operators.
 
 ## Install using the CLI
 In this section, the steps for the command line are listed. 
@@ -9,7 +12,7 @@ In this section, the steps for the command line are listed.
 1. For this, switch tab to your IBM Cloud Shell session and go the root of the cloned git repository from the previous step.
 
    ```bash 
-   $ cd ~/jfall2020-workshop/scripts
+   $ cd ~/buildstuff2020-workshop/scripts
    ```
 
 1. Next, run the following script:
