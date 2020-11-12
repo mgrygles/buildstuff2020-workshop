@@ -34,4 +34,5 @@ public class HelloWorld extends AbstractVerticle {
         public static void main(String[] args){
             Vertx.vertx().deployVerticle(HelloWorld.class.getName());
         }
+    
 }
