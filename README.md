@@ -1,5 +1,5 @@
 # Deploying a Modern Reactive Serverless Microservice to the Cloud 
-# (*Note* Due to the limited time of the Build Stuff 2020 Workshop, the hands-on lab only cover the OpenShift setup, the creation of the Reactive Java Vert.x application, and the deployment part.  The rest of the info and exercises in this guide are intended as optional "take-home" lab, as you will have up to 24 more hours to work with the complimentary OpenShift cluster.)
+### (*Note* Due to the limited time of the Build Stuff 2020 Workshop, the hands-on lab will only cover the OpenShift setup, the creation of the Reactive Java Vert.x application, and the deployment of the application.  The rest of the info and exercises in this guide are intended as an optional "take-home" lab, as you will have up to 24 more hours to access the complimentary OpenShift cluster.)
 
 ## Learning objectives
 
