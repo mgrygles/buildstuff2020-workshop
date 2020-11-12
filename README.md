@@ -1,4 +1,5 @@
-# Deploying a Modern Reactive Serverless Microservice to the Cloud
+# Deploying a Modern Reactive Serverless Microservice to the Cloud 
+# (*Note* Due to the limited time of the Build Stuff 2020 Workshop, the hands-on lab only cover the OpenShift setup, the creation of the Reactive Java Vert.x application, and the deployment part.  The rest of the info and exercises in this guide are intended as optional "take-home" lab, as you will have up to 24 more hours to work with the complimentary OpenShift cluster.)
 
 ## Learning objectives
 
@@ -6,8 +7,8 @@ This workshop is all about creating and deploying a reactive Java app as a Knati
 
 * Create a Reactive Java application using Vert.x
 * Deploy this application as Knative service
-* How to create and use OpenShift pipelines to deploy your app
-* How to leverage Quarkus to create reactive Java applications
+* How to create and use OpenShift pipelines to deploy your app   (*Extra info as optional "take-home" exercise)
+* How to leverage Quarkus to create reactive Java applications   (*Brief intro without the exercise)
 
 Let's start with exploring Knative a bit more...
 
@@ -26,7 +27,7 @@ It has two distinct components, originally it were three. The third was called K
 * __Knative Serving__ is responsible for deploying and running containers, also networking and auto-scaling. Auto-scaling allows scale to zero and is probably the main reason why Knative is referred to as Serverless platform.
 * __Knative Eventing__ allows to connect Knative services (deployed by Knative Serving) or other Kubernetes deployments with events or streams of events.
 
-This workshop will **focus on Knative Serving** and will cover the following topics:
+This workshop will **focus on a quick deployment using Knative Serving** and will cover the following topics:
 
 1. Prerequisites (access to an OpenShift cluster, work environment, etc.)
 
@@ -34,7 +35,9 @@ This workshop will **focus on Knative Serving** and will cover the following top
 
 1. Create, change and deploy a Vert.x example app as Knative service
 
-1. Create an OpenShift pipeline and deploy your Vert.x app with it
+[The followings are extra info for optional "take-home" exercises]
+
+1. Create an OpenShift pipeline and deploy your Vert.x app with it   
 
 1. Creating a Knative Revision
 
@@ -85,6 +88,6 @@ You can find detailed information and learn more about Knative here:
       - [Serverless and Knative – Part 1: Installing Knative on CodeReady Containers](https://haralduebele.blog/2020/06/02/serverless-and-knative-part-1-installing-knative-on-codeready-containers/)
       - [Serverless and Knative – Part 2: Knative Serving](https://haralduebele.blog/2020/06/03/serverless-and-knative-part-2-knative-serving/)
       - [Serverless and Knative – Part 3: Knative Eventing](https://haralduebele.blog/2020/06/10/serverless-and-knative-part-3-knative-eventing/)
-      - [Knative Example: Deploying a Microservices Application](https://haralduebele.blog/2020/07/02/knative-example-deploying-a-microservices-application/) -- The YAML files for this example are in the `code/cloud-native-starter` directory
+      - [Knative Example: Deploying a Microservices Application](https://haralduebele.blog/2020/07/02/knative-example-deploying-a-microservices-application/) -- The YAML files for this example are in the `code-nodejs/cloud-native-starter` directory
 
 
