@@ -98,8 +98,7 @@ We will work with OpenShift in the Web Console and in the command line, using di
 In your Cloud Shell enter the following command to download the code from Github:
 
 ```bash
-$ git clone [https://github.com/mgrygles/buildstuff2020-workshop] (https://github.com/mgrygles/buildstuff2020-workshop)
-$ cd buildstuff2020-workshop
+$ git clone https://github.com/mgrygles/buildstuff2020-workshop
 ```
 
 ---
